@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ban Checker Tool</title>
+</head>
+<body>
+
+<h2>Website Checker</h2>
+
+<input type="text" id="url" placeholder="Enter URL">
+<button onclick="checkURL()">Check</button>
+
+<p id="result"></p>
+
+<script>
+async function checkURL() {
+    let url = document.getElementById("url").value;
+    
+    try {
+        let response = await fetch("https://api.allorigins.win/get?url=" + encodeURIComponent(url));
+        
+        if(response.ok){
+            document.getElementById("result").innerText = "✅ Website Working (Not Banned)";
+        } else {
+            document.getElementById("result").innerText = "❌ Possibly Blocked / Error";
+        }
+    } catch(e) {
+        document.getElementById("result").innerText = "❌ Invalid or Blocked";
+    }
+}
+</script>
+
+</body>
+</html>
